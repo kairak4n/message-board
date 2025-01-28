@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 const { messages } = require("./db")
 const newRouter = require('./routes/newRouter')
+require("dotenv").config()
+
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -14,7 +16,7 @@ app.get("/", (req, res) => {
 app.set("view engine", "ejs")
 app.set("views", "./views")
 
-const PORT = 3000
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
