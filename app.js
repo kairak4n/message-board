@@ -1,15 +1,16 @@
 const express = require("express")
 const app = express()
-const { messages } = require("./db")
 const newRouter = require('./routes/newRouter')
 require("dotenv").config()
+const db = require('./db/queries')
 
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/new", newRouter);
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+    const messages = await db.getAllMessages()
     res.render("index", { title: "Mini Message Board", messages })
 })
 
